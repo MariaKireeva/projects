@@ -1,0 +1,97 @@
+#Создать юзеров:
+u1 = User.objects.create( username = "Kate")
+u2 = User.objects.create( username = "Ted")
+
+#Создать авторов:
+a1 = Author.objects.create(author = User.objects.get(id=5))
+a2 = Author.objects.create(author = User.objects.get(id=6))
+
+#Создать категории:
+cat1 = Category.objects.create( topic = "Politics")
+cat2 = Category.objects.create( topic = "Sport")
+cat3 = Category.objects.create( topic = "Economics")
+cat4 = Category.objects.create( topic = "Nature")
+
+#Присвоить категории постам:
+p1 = Post.objects.create(author = Author.objects.get(id=5), type = 'NW', title = 'The best swimmer', text = 'hggjjg gjgjjg tututu')
+
+p2 = Post.objects.create(author = Author.objects.get(id=6),type = 'AR' , title = 'Sea animals', text = 'hggjjg gjgjjg tututu')
+
+p3 = Post.objects.create(author = Author.objects.get(id=6), type = 'NW', title = 'President elections', text = 'hggjjg gjgjjg tututu')
+
+p1 = Post.objects.get(title = 'The best swimmer')
+cat2 = Category.objects.get( topic = "Sport")
+p1.categories.add(cat2)
+
+p2 = Post.objects.get(title = 'Sea animals')
+cat4 = Category.objects.get( topic = "Nature")
+p2.categories.add(cat4)
+
+p3 = Post.objects.get(title = 'President elections')
+cat1 = Category.objects.get( topic = "Politics")
+cat3 = Category.objects.get( topic = "Economics")
+p3.categories.add(cat1, cat3)
+
+#Создать комментарии:
+u1 = User.objects.get(id=6)
+p1 = Post.objects.get(title = 'The best swimmer')
+com1 = Comment.objects.create(post = p1, user = u1, text = "hgigi gugggi")
+com1.save()
+
+u2 = User.objects.get(id=5)
+p2 = Post.objects.get(title = 'Sea animals')
+com2 = Comment.objects.create(post = p2, user = u2, text = "jfjifi fgifii fjfk")
+com2.save()
+
+u2 = User.objects.get(id=5)
+p3 = Post.objects.get(title = 'President elections')
+com3 = Comment.objects.create(post = p3, user = u2, text = "fgifii fjfk")
+com3.save()
+
+u1 = User.objects.get(id=6)
+p2 = Post.objects.get(title = 'Sea animals')
+com4 = Comment.objects.create(post = p2, user = u1, text = "jfjifi fjfk")
+com4.save()
+
+#Поставить лайки комментариям:
+com1.like()
+com2.like()
+com3.like()
+com4.like()
+
+#Поставить лайки постам:
+p1.like()
+p2.like()
+p3.like()
+p1.like()
+p2.like()
+p3.like()
+p3.dislike()
+
+#Поменять рейтинг:
+p1.post_rate= 10
+p2.post_rate = 15
+p3.post_rate = 25
+
+#Обновить рейтинг:
+for a in Author.objects.all():
+    a.update_raiting()
+
+#Вывести лучшего пользователя:
+Author.objects.all().order_by('-author_raiting').values('author__username','author_raiting')[0]
+#Вывести лучшую статью:
+best = Post.objects.all().order_by('-post_raiting')[0]
+best_post= Post.objects.all().order_by('-post_raiting').values(
+    'date',
+    'author__author__username',
+    'title', 'post_raiting',
+    'text')[0]
+best.preview()
+
+#Вывести все комментарии к статье:
+Comment.objects.filter(post=best).values('user_id', 'date', 'text')
+
+
+
+
+
