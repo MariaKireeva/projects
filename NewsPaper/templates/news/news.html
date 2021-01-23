@@ -1,0 +1,42 @@
+{% extends '/home/maria/PycharmProjects/pythonProject/NewsPaper/templates/news/default.html' %}
+{% load custom_filter %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+    <h1>Все новости</h1>
+    <hr>
+    {% if news %}
+        <table>
+            <tr>
+                <td>
+                    Title
+                </td>
+                <td>
+                    Publication date
+                </td>
+                <td>
+                    Text
+                </td>
+
+            </tr>
+        {% for one_post in news %}
+            <tr>
+                <td>
+                    {{ one_post.title|censor }}
+                </td>
+                <td>
+                    {{ one_post.date|date:'M d Y' }}
+                </td>
+                <td>
+                   {{ one_post.text|censor|truncatewords:20 }}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h2>Новостей нет!</h2>
+    {% endif %}
+{% endblock content %}
