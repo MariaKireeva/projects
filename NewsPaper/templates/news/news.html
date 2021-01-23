@@ -28,7 +28,7 @@ News
                     {{ one_post.title|censor }}
                 </td>
                 <td>
-                    {{ one_post.date|date:'M d Y' }}
+                    {{ one_post.date|date:'M d Y h:m' }}
                 </td>
                 <td>
                    {{ one_post.text|censor|truncatewords:20 }}
