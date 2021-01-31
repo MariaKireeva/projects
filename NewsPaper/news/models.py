@@ -25,7 +25,7 @@ class Category(models.Model):
     topic = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
-        return self.topic
+        return f'{self.topic}'
 
     class Meta:
         verbose_name = 'Category'
@@ -76,7 +76,7 @@ class PostCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.category.name
+        return f'{self.category}'
 
 
 class Comment(models.Model):

@@ -64,7 +64,7 @@ ROOT_URLCONF = 'NewsPaper.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/home/maria/PycharmProjects/pythonProject/NewsPaper/templates/news/'],
+        'DIRS':  [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,6 +131,10 @@ STATIC_URL = '/static/'
 
 
 
+
+
 STATICFILES_DIRS = [
     BASE_DIR / "static"
+
 ]
+

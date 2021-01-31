@@ -3,6 +3,8 @@ from django.views.generic import ListView, UpdateView, CreateView, DetailView, D
 from .models import Post
 from django.core.paginator import Paginator
 from .filters import PostFilter
+from .forms import PostForm
+from datetime import datetime
 
 
 
@@ -20,19 +22,25 @@ class NewsList(ListView):
 
 
 class PostDetailView(DetailView):
+    model = Post
     template_name = 'post_detail.html'
+    form_class = PostForm
     queryset = Post.objects.all()
+
 
 
 
     # дженерик для создания объекта. Надо указать только имя шаблона и класс формы который мы написали в прошлом юните. Остальное он сделает за вас
 class PostCreateView(CreateView):
     template_name = 'post_create.html'
+    form_class = PostForm
 
 
 
 class PostUpdateView(UpdateView):
     template_name = 'post_create.html'
+    form_class = PostForm
+    queryset = Post.objects.all()
 
 
     # метод get_object мы используем вместо queryset, чтобы получить информацию об объекте который мы собираемся редактировать
@@ -45,7 +53,29 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     template_name = 'post_delete.html'
     queryset = Post.objects.all()
+    form_class = PostForm
     success_url = '/news/'
+
+    def get_object(self, **kwargs):
+        id = self.kwargs.get('pk')
+        return Post.objects.get(pk=id)
+
+
+class PostSearchView(ListView):
+    template_name = 'post_search.html'
+    form_class = PostForm
+    queryset = Post.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['time_now'] = datetime.utcnow()
+        context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+
+
+
+
+
 
 
 

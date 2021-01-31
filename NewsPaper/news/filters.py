@@ -7,8 +7,12 @@ class PostFilter(FilterSet):
 
     class Meta:
         model = Post
+
         fields = {'title': ['icontains'],
                   'date': ['lt'],
                   'text': ['exact'],
                   'author': ['exact'],
+                  'categories': ['exact'],
+                  'type': ['exact'],
+
                   }
