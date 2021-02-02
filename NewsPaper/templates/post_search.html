@@ -30,33 +30,27 @@ News
                  <td>
                     <strong>Author</strong>
                 </td>
-                 <td>
-                    <strong>Category</strong>
-                </td>
                 <td>
                     <strong>Type</strong>
                 </td>
             </tr>
-        {% for one_post in filter.qs %}
+        {% for post in filter.qs %}
             <tr>
                 <td>
-                     <a href="{% url 'post_search'%}"></a>
-                    {{ one_post.title|title|censor }}
+                     <a href="{% url 'post_search' %}"></a>
+                    {{ post.title|title|censor }}
                 </td>
                 <td>
-                    {{ one_post.date|date:'M d Y h:m' }}
+                    {{ post.date|date:'M d Y h:m' }}
                 </td>
                 <td>
-                    {{ one_post.text|censor }}
+                    {{ post.text|censor }}
                 </td>
                 <td>
-                    {{ one_post.author }}
+                    {{ post.author }}
                 </td>
                 <td>
-                    {{ news.categories }}
-                </td>
-                <td>
-                    {{ one_post.type }}
+                    {{ post.type }}
                 </td>
             </tr>
 

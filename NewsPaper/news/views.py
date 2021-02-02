@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, UpdateView, CreateView, DetailView, DeleteView
-from .models import Post
+from .models import Post,Category
 from django.core.paginator import Paginator
 from .filters import PostFilter
 from .forms import PostForm
@@ -17,15 +17,25 @@ class NewsList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filter'] = PostFilter(self.request.GET,queryset=self.get_queryset())
+        context['time_now'] = datetime.utcnow()
+        context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset())
+        context['form'] = PostForm()
         return context
-
 
 class PostDetailView(DetailView):
     model = Post
     template_name = 'post_detail.html'
     form_class = PostForm
     queryset = Post.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        id = self.kwargs.get('pk')
+        a = ''
+        for i in Post.objects.get(pk=id).categories.all().values('topic'):
+            a += (i['topic'] + ' ')
+        context['categories'] = a
+        return context
 
 
 
@@ -66,10 +76,13 @@ class PostSearchView(ListView):
     form_class = PostForm
     queryset = Post.objects.all()
 
+
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['time_now'] = datetime.utcnow()
         context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset())
+
         return context
 
 

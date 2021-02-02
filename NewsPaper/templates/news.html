@@ -28,27 +28,29 @@ News
         </th>
 
 
+
     </thead>
-    {% for one_post in filter.qs %}
+    {% for post in filter.qs %}
     <tr>
         <td>
-             <a href="{% url 'post_detail' one_post.id %}">{{ one_post.title|title}}</a>
-             <a href="{% url 'post_update' one_post.id %}"><u>Change</u></a>
-             <a href="{% url 'post_delete' one_post.id %}"><u> Delete </u></a>
+             <a href="{% url 'post_detail' post.id %}">{{ post.title|title}}</a>
+             <a href="{% url 'post_update' post.id %}"><u>Change</u></a>
+             <a href="{% url 'post_delete' post.id %}"><u> Delete </u></a>
         </td>
         
         <td>
-            {{ one_post.type }}
+            {{ post.type }}
         </td>
         <td>
-           {{ one_post.date|date:'M d Y h:m' }}
+           {{ post.date|date:'M d Y h:m' }}
         </td>
         <td>
-            {{ one_post.text|censor|truncatewords:20 }}
+            {{ post.text|censor|truncatewords:20 }}
         </td>
         <td>
-            {{ one_post.author }}
+            {{ post.author }}
         </td>
+
 
     </tr>
     {% endfor %}

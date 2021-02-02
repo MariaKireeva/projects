@@ -2,7 +2,7 @@
 {% load custom_filter %}
 
 {% block title %}
-News
+Post
 {% endblock title %}
 
 {% block content %}
@@ -21,21 +21,27 @@ News
         <th>
             Author
         </th>
+        <th>
+            Category
+        </th>
 
     </thead>
 
     <tr>
         <td>
-            {{ one_post.title|censor }}
+            {{ post.title|censor }}
         </td>
         <td>
-            {{ one_post.date|date:'M d Y h:m' }}
+            {{ post.date|date:'M d Y h:m' }}
         </td>
         <td>
-            {{ one_post.text|censor|truncatewords:20 }}
+            {{ post.text|censor|truncatewords:20 }}
         </td>
         <td>
-            {{ one_post.author }}
+            {{ post.author }}
+        </td>
+        <td>
+            {{ categories }}
         </td>
     </tr>
 
