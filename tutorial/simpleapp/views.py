@@ -43,9 +43,10 @@ class ProductUpdateView(UpdateView):
         id = self.kwargs.get('pk')
         return Product.objects.get(pk=id)
 
-
 # дженерик для удаления товара
 class ProductDeleteView(DeleteView):
     template_name = 'product_delete.html'
     queryset = Product.objects.all()
     success_url = '/products/'
+
+

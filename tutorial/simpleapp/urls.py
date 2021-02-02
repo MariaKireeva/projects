@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import Products, ProductDetailView, ProductCreateView, ProductUpdateView, ProductDeleteView
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('', Products.as_view()),
