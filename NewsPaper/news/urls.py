@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import NewsList, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, PostSearchView
-
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
 

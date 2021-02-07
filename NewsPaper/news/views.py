@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import ListView, UpdateView, CreateView, DetailView, DeleteView
-from .models import Post,Category
+from .models import Post,Author
 from django.core.paginator import Paginator
 from .filters import PostFilter
 from .forms import PostForm
 from datetime import datetime
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 
@@ -41,16 +43,21 @@ class PostDetailView(DetailView):
 
 
     # дженерик для создания объекта. Надо указать только имя шаблона и класс формы который мы написали в прошлом юните. Остальное он сделает за вас
-class PostCreateView(CreateView):
+class PostCreateView(PermissionRequiredMixin, CreateView):
+    model = Post
     template_name = 'post_create.html'
     form_class = PostForm
+    permission_required = ('news.add_post','news.view_post')
 
 
 
-class PostUpdateView(UpdateView):
+
+class PostUpdateView(PermissionRequiredMixin, UpdateView):
+    model = Post
     template_name = 'post_create.html'
     form_class = PostForm
     queryset = Post.objects.all()
+    permission_required = ('news.change_post','news.view_post')
 
 
     # метод get_object мы используем вместо queryset, чтобы получить информацию об объекте который мы собираемся редактировать
@@ -84,7 +91,6 @@ class PostSearchView(ListView):
         context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset())
 
         return context
-
 
 
 
