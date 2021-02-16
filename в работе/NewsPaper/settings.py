@@ -25,7 +25,11 @@ SECRET_KEY = '3@@5wk7dl&$05yumlh_v^k$2gcup+*69xhi%w7h4da5h14zmlk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1',
+                 'localhost',
+
+                 ]
+
 
 AUTHENTICATION_BACKENDS = [
 
@@ -48,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'Fpages',
-    'news',
+    'news.apps.NewsConfig',
     'django_filters',
     'sign',
     'protect',

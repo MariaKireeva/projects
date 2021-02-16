@@ -1,10 +1,11 @@
 <table>
     <tr>
         <td>
-            <p>Уважаемый пользователь</p>
-            <p>В подписанной вами категории появились новые публикации!</p>
-            <a href="http://localhost:8000/{{ link }}" style="color:#0000ff">{{ new_post }}</a>
+            <p>Dear User</p>
+            <p>There are new posts in category you've subscribed to!</p>
+            <p> Title: {{ new_post.title }}</p><br>
+            <a href="{{ link }}" style="color:#0000ff">{{ new_post }}</a>
         </td>
-        >
+
     </tr>
 </table>

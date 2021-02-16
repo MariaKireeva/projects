@@ -1,14 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, UpdateView, CreateView, DetailView, DeleteView
-from .models import Post,Category,CategorySubscribers
+from .models import *
 from django.core.paginator import Paginator
 from .filters import PostFilter
 from .forms import PostForm
 from datetime import datetime
-from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.conf import settings
 
@@ -126,7 +124,7 @@ def subscribe_category(request):
     send_mail(
         subject=f'{User.username} ',
         # имя клиента и дата записи будут в теме для удобства
-        message=f'Вы подписались на категорию {category}',  # сообщение с кратким описанием проблемы
+        message=f'Subscribed to the category {category}',  # сообщение с кратким описанием проблемы
         from_email=settings.DEFAULT_FROM_EMAIL,  # здесь указываете почту, с которой будете отправлять (об этом попозже)
         recipient_list=[f'{user.email}', ]  # здесь список получателей. Например, секретарь, сам врач и т. д.
     )
@@ -146,7 +144,7 @@ def unsubscribe_category(request):
     send_mail(
         subject=f'{category.subscribers}',
         # имя клиента и дата записи будут в теме для удобства
-        message=f'Вы отписались от категории {category}',  # сообщение с кратким описанием проблемы
+        message=f'Unsubscribed from the category {category}',  # сообщение с кратким описанием проблемы
         from_email=settings.DEFAULT_FROM_EMAIL,  # здесь указываете почту, с которой будете отправлять (об этом попозже)
         recipient_list=[f'{user.email}', ]  # здесь список получателей. Например, секретарь, сам врач и т. д.
     )
