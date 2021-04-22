@@ -1,0 +1,45 @@
+{% extends 'news/default.html' %}
+{% load custom_filter %}
+
+{% block title %}
+Post
+{% endblock title %}
+
+{% block content %}
+
+<table>
+    <thead>
+        <th>
+           Title
+        </th>
+        <th>
+            Publication date
+        </th>
+        <th>
+            Text
+        </th>
+        <th>
+            Author
+        </th>
+
+    </thead>
+
+    <tr>
+        <td>
+            {{ post.title|censor }}
+        </td>
+        <td>
+            {{ post.date|date:'M d Y h:m' }}
+        </td>
+        <td>
+            {{ post.text|censor|truncatewords:20 }}
+        </td>
+        <td>
+            {{ post.author }}
+        </td>
+
+    </tr>
+
+</table>
+
+{% endblock content %}
