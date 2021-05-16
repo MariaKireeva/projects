@@ -1,0 +1,13 @@
+{% extends 'flatpages/default.html' %}
+{% block content %}
+<h5 class="mt-0">Чаты:</h5>
+{% for chat in my_chats %}
+{% if user.id is chat.user1.id %}
+<h5 class="mt-0"><a href="{% url 'message' chat.id %}">{{ chat.user2 }}</a></h5>
+
+{% else %}
+<h5 class="mt-0"><a href="{% url 'message' chat.id %}">{{ chat.user1 }}</a></h5>
+
+{% endif %}
+{% endfor %}
+{% endblock content %}

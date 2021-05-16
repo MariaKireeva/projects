@@ -1,0 +1,41 @@
+{%extends 'flatpages/default.html' %}
+{% block content %}
+    {%  if tag_post %}
+
+        <table>
+            <tr>
+                <td>
+                    <strong>Заголовок</strong>
+                </td>
+                <td>
+                    <strong>Дата публикации</strong>
+                </td>
+                <td>
+                    <strong>первые 50 символов</strong>
+                </td>
+            </tr>
+
+        {% for post in tag_post %}
+            <tr style="{% cycle 'color: #00ff00;' 'color: #ff0000;' %}">
+                <td>
+
+                <a href="{% url 'post_detail' post.id %}">{{ post.headline|title }}</a>
+
+                </td>
+                <td>
+                    {{ post.create_time }}
+                </td>
+                <td>
+                    {{ post.text|truncatechars:50 }}
+                    {% for tag in post.categories.all  %}
+                        {{ tag }}
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+
+        </table>
+    {%  else %}
+        <h1>новостей нет</h1>
+    {% endif %}
+{% endblock content %}

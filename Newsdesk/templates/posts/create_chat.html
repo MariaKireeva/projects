@@ -1,0 +1,12 @@
+{%extends 'flatpages/default.html' %}
+{% block content %}
+{% if chat %}
+<h5>Чат с {{ user2 }} уже создан, перейдите в <a href="/posts/messages/">мои чаты</a></h5>
+
+{% else %}
+<h5>Создать чат с {{ user2 }}?</h5><br />
+    <form method="post">{% csrf_token %}
+        <button type="submit" class="btn btn-outline-success" name="like_com" value="{{com.id}}">создать чат</button>
+    </form><br>
+{% endif %}
+{% endblock content %}

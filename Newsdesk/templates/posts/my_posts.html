@@ -1,0 +1,19 @@
+{%extends 'flatpages/default.html' %}
+
+
+{% block content %}
+{% for post in my_posts %}
+<h1 class="mt-4">{{ post.headline }}</h1>
+<p class="lead">{{ post.text }}</p>
+                <a class="btn btn-info" href="{% url 'post_update' post.id %}"><u>Редактировать</u></a> <!-- добавим ссылку на редактирование товара-->
+                <a class="btn btn-danger" href="{% url 'post_delete' post.id %}"><u> Удалить </u></a> <!-- добавим ссылку на удаление товара-->
+{% for resp in post.response.all %}
+{{ resp }}
+ <form method="post">{% csrf_token %}
+     <button type="submit" class="save" name="accept_response" value="{{post.id}} {{resp.id}}">принять</button>
+     <button type="submit" class="save" name="delete_response" value="{{post.id}} {{resp.id}}">удалить отклик</button>
+ </form>
+{% endfor %}
+{% endfor %}
+
+{% endblock content %}

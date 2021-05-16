@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p><h4>Здравствуй, {{ author }}. Новый отклик от пользователя {{ user }}</h4></p>
+    <h2> Ваше объявление: {{ headline }}</h2><br>
+            <a href="{{ link }}">Ссылка на статью</a>
+    </li><br><br>
+
+    <h7> С уважением, команда AlexNews</h7>
+    {% endblock content %}
+</body>
+</html>

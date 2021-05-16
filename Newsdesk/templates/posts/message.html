@@ -1,0 +1,36 @@
+{% extends 'flatpages/default.html' %}
+{% block content %}
+<h5>Сообщения: {{ companion }}</h5><br />
+{% endblock content %}
+
+{% block commentform %}
+  <div class="card my-4">
+    <h5 class="card-header">Сообщение:</h5>
+    <div class="card-body">
+        <form method="POST">    {% csrf_token %}
+        <div class="form-group">
+        {{ form }} <!-- Теперь нам нужна только готовая форма и кнопка -->
+        </div>
+        <button type="submit" class="btn btn-primary">опубликовать</button>
+        </form>
+    </div>
+  </div>
+
+{% endblock commentform %}
+
+{% block comment %}
+{% for message in messages %}
+
+    <div class="media mb-4">
+
+          <img class="d-flex mr-3 rounded-circle" src="{{message.user.avatar.url}}" alt="" style="width:50px;height:50px;">
+          <div class="media-body">
+
+              <h5 class="mt-0">{{ message.user  }}</h5>
+    {{ message.text }}<br>
+        {{ message.created }}<br>
+          </div>
+
+    </div>
+{% endfor %}
+{% endblock comment %}

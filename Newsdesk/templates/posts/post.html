@@ -1,0 +1,120 @@
+{%extends 'flatpages/default.html' %}
+{% block title %}
+Post
+{% endblock title %}
+
+
+{% block content %}
+    <h5>Заголовок: {{ post.headline }}</h5><br />
+    <h7>Дата публикации: {{ post.create_time|date:'d.M.Y h:m' }}</h7><br />
+    <h7>Текст:</h7><br />
+        {{ post.text}}<br /><br />
+    <h7>Автор: {{ post.author }}   </h7><br />
+{% for i in images %}
+<img class="" src="{{ i.image.url }}" alt="" style="width:600px;height:600px;">
+
+{% endfor %}
+{% if user not in post.response.all %}
+<form method="post">{% csrf_token %}
+    <button type="submit" class="save" name="response">Откликнуться</button><br />
+    </form>
+{% endif %}
+    {% for tag in post_categories %}
+    {{ tag.tag }}
+    {% if tag not in user_categories %}
+        <form method="post">{% csrf_token %}
+        <button type="submit" class="save" name="subscribe" value={{tag.id}}>подписаться!</button>
+        </form>
+        <br>
+        {% else %}
+        <h7> - Уже подписаны</h7>
+        <form method="post">{% csrf_token %}
+        <button type="submit" class="save" name="unsubscribe" value={{tag.id}}>отписаться?</button>
+        </form>
+    {% endif %}
+    {% endfor %}
+    <h7>Рейтинг статьи: {{ rating }}</h7><br><br>
+    {%  if user not in likers and user not in dislikers %}
+        <form method="post">{% csrf_token %}
+    <button type="submit" class="save" name="like_post" value="{{tag.id}}">Like</button>
+    <button type="submit" class="save" name="dislike_post" value="{{tag.id}}">Dislike</button>
+
+    </form>
+
+
+    {% elif user in likers %}
+        <h7>Вам понравилась статья</h7><br>
+    {% else %}
+        <h7>Вам не понравилась статья</h7><br>
+    {% endif %}
+{% endblock content %}
+
+
+{% block commentform %}
+  <div class="card my-4">
+    <h5 class="card-header">Leave a Comment:</h5>
+    <div class="card-body">
+        <form method="POST">    {% csrf_token %}
+        <div class="form-group">
+        {{ form }} <!-- Теперь нам нужна только готовая форма и кнопка -->
+        </div>
+        <button type="submit" class="btn btn-primary">опубликовать</button>
+        </form>
+    </div>
+  </div>
+
+{% endblock commentform %}
+
+{% block comment %}
+{% for com in comments %}
+
+    <div class="media mb-4">
+
+          <img class="d-flex mr-3 rounded-circle" src="{{com.comment_user.avatar.url}}" alt="" style="width:50px;height:50px;">
+          <div class="media-body">
+    {% if user.id is not com.comment_user.id %}
+              <h5 class="mt-0"><a href="{% url 'make_chat' com.comment_user.id %}">{{ com.comment_user }}</a></h5>
+    {% else %}
+    <h5 class="mt-0">{{ com.comment_user }}</h5>
+    {% endif %}
+    {{ com.com_text }}<br>
+        {{ com.com_time }}<br>
+        {%  if user not in com.com_likers.all and user not in com.com_dislikers.all %}
+    <form method="post">{% csrf_token %}
+        <h7>Оценка:  </h7>{{ com.com_rating }}<br>
+        <button type="submit" class="btn btn-outline-success" name="like_com" value="{{com.id}}">лайкнуть</button>
+        <button type="submit" class="btn btn-outline-dark" name="dislike_com" value="{{com.id}}">дислайкнуть</button>
+    </form><br>
+{% elif user in com.com_likers.all %}
+        <h7>Вам понравилось</h7><br>
+    {% else %}
+        <h7>Вам не понравилось</h7><br>
+    {% endif %}
+          </div>
+
+    </div>
+{% endfor %}
+{% endblock comment %}
+
+{% block tags %}
+<div class="card my-4">
+          <h5 class="card-header">Categories</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                    {% for tag in all_tags %}
+                  <li>
+                    <a href="{% url 'taglist' tag.id %}">{{ tag }}</a>
+                  </li>
+                    {% endfor %}
+                </ul>
+              </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock tags %}
+
+
