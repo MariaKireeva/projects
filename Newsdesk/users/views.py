@@ -22,7 +22,6 @@ class UserPage(LoginRequiredMixin, TemplateView):
         context['is_not_author'] = not self.request.user.groups.filter(name='authors').exists()
         context['user'] = CustomUser.objects.get(username=user)
         category = Category.objects.filter(subscribers=user)
-        # Блок для получения подписанных категории
         list_category = []
         for i in category:
             list_category.append(str(i))

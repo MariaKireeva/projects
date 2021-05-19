@@ -12,8 +12,7 @@ from .filters import PostFilter
 from django.http import HttpResponse
 from django.views import View
 
-# Create your views here.
-#class RedirectPermissionRequiredMixin(PermissionRequiredMixin):
+
 
 class PostList(ListView):
     model = Post

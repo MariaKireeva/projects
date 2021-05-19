@@ -8,9 +8,8 @@
 {% block header %} Авторизация на сайте {% endblock header %}
 
 {% block little_header %}
-<p>{% blocktrans with site.name as site_name %}Пожалуйста, войдите с одним из
-    ваших существующих учетных записей, либо <a href="{{ signup_url }}">зарегистрируйтесь,</a>
-    если у вас еще нет аккаунта:{% endblocktrans %}</p>
+<p>{% blocktrans with site.name as site_name %}Войдите или <a href="{{ signup_url }}">зарегистрируйтесь,</a>
+    если у вас нет аккаунта:{% endblocktrans %}</p>
 {% endblock little_header %}
 
 

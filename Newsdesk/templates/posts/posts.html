@@ -12,10 +12,10 @@ Posts
         body {background-color: {% if time_now.hour >= 19 or time_now.hour <= 7 %} #08e8de {% else %} #aa0 {% endif %};}
 
     </style>
-    <h1>Количество статей:  {{ posts|length }}</h1>
+    <h1>Количество статей:  {{ posts|length }} </h1><br>
 
     {{ current }}
-    <h1>Все статьи</h1>
+
     <h3>{{ time_now }}</h3><br>
 
     {%  if posts %}
