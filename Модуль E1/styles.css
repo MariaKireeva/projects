@@ -1,0 +1,51 @@
+body {
+  margin: 2;
+  font-family: Arial, Verdana, sans-serif;
+  text-align:center;
+  background-color: #f5f5dc;
+}
+.navigation{
+    display: flex;
+    justify-content: space-around;
+    background-color: #7ba05b;
+    height: 70px;
+    color: #101010;
+
+}
+
+.navigation a{
+    color: #101010;
+    display: table;
+    float: left;
+    padding: 30px 30px 0px 30px;
+    background-color: #7ba05b;
+    text-align: center;
+    font-size: 30px;
+    background-height: 40px;
+}
+
+.navigation a li{
+    vertical-align: middle;
+    display: table-cell;
+    font-size: 50px;
+    color: black;
+}
+
+.navigation a:hover{
+    background-color: gray;
+    color: #101010;
+}
+.img {
+    float:left;
+    margin: 7px 7px 7px 0; /* Отступы вокруг картинки */
+
+   }
+footer {
+    position: fixed; /* Фиксированное положение */
+    left: 0; bottom: 0; /* Левый нижний угол */
+    padding: 20px; /* Поля вокруг текста */
+    background: #cd5f32; /* Цвет фона */
+    color: #101010; /* Цвет текста */
+    width: 100%; /* Ширина слоя */
+    text-align:center;
+   }
