@@ -1,0 +1,79 @@
+.weather__aut {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.weather__hourly {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 5rem;
+}
+.weather__information {
+  border: white solid 1px;
+  padding: 1rem;
+  box-shadow: 0 0 4px white;
+  transition: box-shadow 0.2s linear;
+}
+.weather__information:hover {
+  box-shadow: 0 0 25px white;
+}
+.weather__hourlycol {
+  width: 10%;
+  padding: 1rem;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+.weather__information--date,
+.weather__information--temp,
+.weather__information--hour {
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.weather__information--img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.weather__dailycol {
+  width: 10%;
+  padding: 0.5rem;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+.weather__information--dailytemp {
+  font-size: 1rem;
+  text-align: center;
+}
+.weather__dailyinformation {
+  border: white solid 1px;
+  padding: 1rem;
+  box-shadow: 0 0 4px white;
+  transition: box-shadow 0.2s linear;
+}
+.weather__dailyinformation:hover {
+  box-shadow: 0 0 25px white;
+}
+
+@media screen and (max-width: 1200px) {
+  .weather__dailycol,
+  .weather__hourlycol {
+    width: auto;
+  }
+}
+@media screen and (max-width: 900px) {
+  .weather__aut {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .weather__aut {
+    font-size: 1.5rem;
+  }
+}
